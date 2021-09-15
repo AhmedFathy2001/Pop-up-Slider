@@ -18,14 +18,12 @@ function showImage() {
     imgStopProp.classList.add('active')
     item[currentIndex].classList.add('opacityActive')
     document.body.classList.add('scroll-lock')
-
 }
 //removes animation classes
 function removeImage() {
     imgStopProp.classList.remove('active')
     item[currentIndex].classList.remove('opacityActive')
     document.body.classList.remove('scroll-lock')
-
 }
 
 function animationAdd() {
@@ -37,8 +35,6 @@ function animationAdd() {
     }, 300)
 }
 
-
-
 // gets current slide and increments/decrements it by 1 and checks if its in the range of the array
 function slide(i) {
     item[currentIndex].classList.remove('opacityActive')
@@ -49,8 +45,8 @@ function slide(i) {
         currentIndex = imgs.length - 1
     }
 }
-//Adds an event listener to every image in the array
 
+//Adds an event listener to every image in the array
 function setImage(e, i) {
     slider.classList.replace('d-none', 'd-flex')
     setTimeout(() => {
@@ -61,7 +57,6 @@ function setImage(e, i) {
         e.target.src : e.target.closest('.item').querySelector('img').src
     currentIndex = i
 }
-
 item.forEach((item, index) => {
     item.addEventListener('click', (e) => {
         setImage(e, index)
@@ -98,41 +93,46 @@ nextBtn.addEventListener("click", nextSlide)
 closeBtn.addEventListener("click", closeSlide)
     //Event listener for keyboard keys
 document.addEventListener("keyup", function(e) {
-        if (e.key == "Escape") {
-            closeSlide()
-            removeImage()
-                //adds the .active class with a delay of 0.1s
-            setTimeout(() => {
-                removeImage()
-            }, 300)
-        } else if (e.key == "ArrowRight") {
-            slide(1)
-            animationAdd()
-
-        } else if (e.key == "ArrowLeft") {
-            slide(-1)
-            animationAdd()
-        }
-    })
-    //Event listener for keybind ctrl & a
-document.addEventListener("keydown", function(e) {
-        if (e.ctrlKey && e.key == 'a') {
-            e.preventDefault()
-            if (slider.classList.contains('d-none')) {
-                slider.classList.replace('d-none', 'd-flex')
+        if (imgStopProp.classList.contains('active')) {
+            if (e.key == "Escape") {
+                closeSlide()
                 removeImage()
                     //adds the .active class with a delay of 0.1s
                 setTimeout(() => {
-                    showImage()
-                    imgSrc.setAttribute('src', imgs[0].getAttribute('src'))
+                    removeImage()
                 }, 300)
-            } else {
+            } else if (e.key == "ArrowRight") {
+                slide(1)
+                animationAdd()
+
+            } else if (e.key == "ArrowLeft") {
+                slide(-1)
+                animationAdd()
+            } else if (e.key == "ArrowUp" || e.key == 'ArrowDown') {
                 closeSlide()
             }
-            currentIndex = 0
-        }
+        } else return
     })
-    // closes the slider popup when clicked outside of the image
+    //Event listener for keybind ctrl & a
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.key == 'a') {
+        e.preventDefault()
+        if (slider.classList.contains('d-none')) {
+            slider.classList.replace('d-none', 'd-flex')
+            removeImage()
+                //adds the .active class with a delay of 0.1s
+            setTimeout(() => {
+                showImage()
+                imgSrc.setAttribute('src', imgs[0].getAttribute('src'))
+            }, 300)
+        } else {
+            closeSlide()
+        }
+        currentIndex = 0
+    }
+})
+
+// closes the slider popup when clicked outside of the image
 slider.addEventListener("click", closeSlide);
 //prevents close when image is clicked
 imgStopProp.addEventListener("click", function(e) {
@@ -157,7 +157,6 @@ slider.addEventListener('touchstart', e => {
         //uncomment to allow closing slider with swiping up and down
         // touchStartY = e.changedTouches[0].screenY
 })
-
 
 //Event Listener to get the end touch points
 slider.addEventListener('touchend', e => {
