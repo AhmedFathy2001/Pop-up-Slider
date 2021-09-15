@@ -1,0 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content {
+    width: 80%;
+    left: 10%;
+    bottom: 40px;
+    background-color: white;
+}
+
+.full-size-img {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.img-full-size {
+    position: relative;
+    font-size: 1.5rem;
+    padding: 0 .625rem;
+    width: 45%;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+
+#closeBtn {
+    top: .625rem;
+    right: 1.25rem;
+}
+
+i,
+.item {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .img-full-size {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .img-full-size {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .img-full-size {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 578px) {
+    .img-full-size {
+        width: 100%;
+    }
+    .scroll-lock {
+        overflow: hidden;
+    }
+}
+
+.fa-arrow-alt-circle-right {
+    right: 1.25rem;
+}
+
+.fa-arrow-alt-circle-left {
+    left: 1.25rem;
+}
+
+.img-full-size {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+
+.img-full-size.active {
+    -webkit-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    -webkit-transition: .3s transform;
+    -o-transition: .3s transform;
+    transition: .3s transform;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+
+.item {
+    -webkit-transition: .3s opacity;
+    -o-transition: .3s opacity;
+    transition: .3s opacity;
+}
+
+.item {
+    opacity: 1;
+}
+
+.item.opacityActive {
+    opacity: 0;
+}
