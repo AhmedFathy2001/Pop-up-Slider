@@ -9,8 +9,8 @@ let imgStopProp = document.getElementById('imgStopProp')
 let touchStartX = 0
 let touchEndX = 0
     // uncomment to enable swiping for close
-    // let touchStartY = 0
-    // let touchEndY = 0
+let touchStartY = 0
+let touchEndY = 0
 let currentIndex
 
 //adds animation classes
@@ -146,22 +146,22 @@ function handleGesture() {
     if (touchResX < -40) nextSlide()
     if (touchResX > 40) prevSlide()
         //uncomment to allow closing slider with swiping up and down
-        // touchResY = touchEndY - touchStartY
-        // if (touchResY < -50) closeSlide()
-        // if (touchResY > 50) closeSlide()
+    touchResY = touchEndY - touchStartY
+    if (touchResY < -50) closeSlide()
+    if (touchResY > 50) closeSlide()
 }
 
 //Event Listener to get the starting touch points
 slider.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX
         //uncomment to allow closing slider with swiping up and down
-        // touchStartY = e.changedTouches[0].screenY
+    touchStartY = e.changedTouches[0].screenY
 })
 
 //Event Listener to get the end touch points
 slider.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX
         //uncomment to allow closing slider with swiping up and down
-        // touchEndY = e.changedTouches[0].screenY
+    touchEndY = e.changedTouches[0].screenY
     handleGesture()
 })
